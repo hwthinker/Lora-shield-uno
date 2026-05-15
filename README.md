@@ -126,7 +126,8 @@ dragino Lora shield/
     ├── 01-lora-uart/                  ← TX satu arah, polling RX
     ├── 02-Lora-UART-LED_notif/        ← TX + RX non-blocking + LED
     ├── 03-Lora-peer-to-peer/          ← Ping-Pong dua arah
-    └── 04-lora-ack/                   ← TX dengan konfirmasi ACK
+    ├── 04-lora-ack/                   ← TX dengan konfirmasi ACK
+    └── 05-master-slave-3node/         ← Master-Slave 3 node, round-robin polling
 ```
 
 ---
@@ -223,6 +224,33 @@ source-code/04-lora-ack/
 
 ---
 
+### 05 — LoRa Master-Slave 3 Node (Round-Robin Polling)
+
+> [README lengkap →](source-code/05-master-slave-3node/README.md)
+
+Komunikasi LoRa **multi-node** dengan topologi **Master-Slave**. Master melakukan round-robin polling ke 2 Slave — Slave hanya merespon saat dipanggil. Ini adalah pola multi-node paling sederhana dan paling mudah dipelajari.
+
+```
+source-code/05-master-slave-3node/
+├── README.md
+├── master/
+│   └── master.ino          ← Upload ke COM8 — polling Slave 1 & 2 bergantian
+├── slave1/
+│   └── slave1.ino          ← Upload ke COM9 — respon hanya saat POLL:1
+└── slave2/
+    └── slave2.ino          ← Upload ke COM10 — respon hanya saat POLL:2
+```
+
+| File | Port | Peran | Mekanisme RX | Timeout |
+|---|---|---|---|---|
+| `master` | COM8 | Master — polling round-robin | Polling `parsePacket()` | 500 ms per slave |
+| `slave1` | COM9 | Slave 1 — respon ke POLL:1 | Polling `parsePacket()` | — |
+| `slave2` | COM10 | Slave 2 — respon ke POLL:2 | Polling `parsePacket()` | — |
+
+> Upload **slave2 & slave1 dulu**, baru master.
+
+---
+
 ## Ringkasan Perbandingan Subproject
 
 | Subproject | Arah Data | Mekanisme RX | ACK | LED |
@@ -231,6 +259,7 @@ source-code/04-lora-ack/
 | **02** — LED notif | Satu arah | Interrupt + flag | Tidak | Ya |
 | **03** — Peer-to-peer | Dua arah | Polling | Tidak (auto-retry) | Ya |
 | **04** — ACK | Dua arah | Interrupt + flag | Ya (3 detik timeout) | Ya |
+| **05** — Master-Slave 3 Node | Dua arah (star) | Polling | Tidak (round-robin timeout 500 ms) | Ya |
 
 ---
 
@@ -240,3 +269,5 @@ source-code/04-lora-ack/
 - [Skematik v1.2 (PDF)](schematic/Lora%20Shield%20v1.2.sch.pdf)
 - [Library LoRa by sandeepmistry](https://github.com/sandeepmistry/arduino-LoRa)
 - [Datasheet SX1276](https://www.semtech.com/products/wireless-rf/lora-connect/sx1276)
+- [Capuf Web Terminal Serial Port ](https://capuf.in/serial-terminal/)
+- 
