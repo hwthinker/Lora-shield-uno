@@ -1,7 +1,7 @@
 /*
   LoRa Master-Slave 3 Node - Dragino LoRa Shield v1.2 + Arduino Uno (ATmega328P)
   Library : LoRa by sandeepmistry v0.8.x
-  Upload to: COM9 (SLAVE 1)
+  Upload to: COM4 (SLAVE 1)
 
   Slave 1 hanya merespon ketika Master mengirim "POLL:1".
   Balasan: "S1:DATA:N" — N adalah counter lokal yang naik setiap kali dipoll.
@@ -23,7 +23,7 @@
 #define DIO0_PIN          2
 #define LED_PIN          LED_BUILTIN
 
-#define FREQUENCY        433E6
+#define FREQUENCY        920E6
 #define BANDWIDTH        125E3
 #define SPREADING_FACTOR 7
 #define CODING_RATE      5
@@ -31,7 +31,7 @@
 
 #define SLAVE_ID         1
 
-int dataCounter = 0;
+unsigned long dataCounter = 0;  // unsigned long: aman hingga 4.294.967.295 (vs int yang overflow di 32.767)
 int rxCount = 0;
 
 void transmit(const String& msg) {
@@ -41,7 +41,7 @@ void transmit(const String& msg) {
 }
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial);
 
   pinMode(LED_PIN, OUTPUT);
@@ -83,7 +83,9 @@ void loop() {
   }
 
   rxCount++;
-  dataCounter++;
+  // dataCounter++ sengaja dipindah ke SETELAH transmit()
+  // Filosofi: counter merepresentasikan "berapa kali slave BERHASIL kirim ke master"
+  // bukan "berapa kali slave berniat kirim" — kalau TX gagal, counter tidak berhak naik
   digitalWrite(LED_PIN, HIGH);
 
   Serial.print(F("[RX] ")); Serial.print(received);
@@ -91,6 +93,7 @@ void loop() {
   Serial.print(F(" dBm | SNR: ")); Serial.print(LoRa.packetSnr());
   Serial.print(F(" dB | RX#: ")); Serial.println(rxCount);
 
+  dataCounter++;  // naik SETELAH TX — nilai ini yang dikirim, mencerminkan jumlah TX aktual
   String reply = "S" + String(SLAVE_ID) + ":DATA:" + String(dataCounter);
   Serial.print(F("[TX] ")); Serial.println(reply);
 

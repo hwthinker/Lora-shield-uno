@@ -58,7 +58,7 @@ Fitur utama:
 | **Board utama** | Arduino Uno (ATmega328P) |
 | **Shield LoRa** | Dragino LoRa Shield v1.2 |
 | **Modul LoRa** | SX1276 (onboard shield) |
-| **Frekuensi** | **433 MHz** |
+| **Frekuensi** | **920 MHz** |
 | **LED** | LED built-in Arduino pada **D13** (shared dengan SPI SCK) |
 | **Antena** | Antena LoRa eksternal via konektor SMA (wajib dipasang pada kedua board) |
 | **Jumlah board** | **2 set** — masing-masing upload file yang berbeda |
@@ -97,7 +97,7 @@ Fitur utama:
 
 ```
 ┌──────────────────────────┐                      ┌──────────────────────────┐
-│   DEVICE A (COM8)        │    LoRa 433 MHz       │   DEVICE B (COM9)        │
+│   DEVICE A (COM8)        │    LoRa 920 MHz       │   DEVICE B (COM9)        │
 │   03a-...ino             │ ◄──────────────────► │   03b-...ino             │
 │   Peran: INITIATOR       │                      │   Peran: RESPONDER       │
 │   Boot → kirim Ping      │                      │   Boot → tunggu RX       │
@@ -205,7 +205,7 @@ if (millis() - lastTxMs > PING_INTERVAL) {
 
 | Parameter | Nilai |
 |---|---|
-| Frekuensi | **433 MHz** |
+| Frekuensi | **920 MHz** |
 | Bandwidth | **125 kHz** |
 | Spreading Factor | **SF7** |
 | Coding Rate | **4/5** |
@@ -259,7 +259,7 @@ Buka Serial Monitor kedua port (baud **9600**). Ping-Pong akan berjalan otomatis
 ```
 === DEVICE A — INITIATOR ===
 Init LoRa ... OK
-Freq: 433.00 MHz
+Freq: 920.00 MHz
 
 [TX] DeviceA:Ping
 
@@ -280,7 +280,7 @@ Freq: 433.00 MHz
 ```
 === DEVICE B — RESPONDER ===
 Init LoRa ... OK
-Freq: 433.00 MHz
+Freq: 920.00 MHz
 Menunggu paket dari Device A...
 
 ================================

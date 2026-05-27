@@ -58,7 +58,7 @@ Seluruh kode ditulis untuk dan diuji pada **Dragino LoRa Shield v1.2 + Arduino U
 | **Board utama** | Arduino Uno (ATmega328P) |
 | **Shield LoRa** | Dragino LoRa Shield v1.2 |
 | **Modul LoRa** | SX1276 (onboard shield) |
-| **Frekuensi** | **433 MHz** |
+| **Frekuensi** | **920 MHz** |
 | **LED** | LED built-in Arduino pada **D13** (shared dengan SPI SCK) |
 | **Antena** | Antena LoRa eksternal via konektor SMA (wajib dipasang) |
 | **Jumlah board** | **2 set** — satu sebagai sender (COM8), satu sebagai receiver (COM9) |
@@ -149,7 +149,7 @@ setup()
   ├─ Serial.begin(9600)
   ├─ pinMode(LED_PIN, OUTPUT)
   ├─ LoRa.setPins(NSS=10, RST=9, DIO0=2)
-  ├─ LoRa.begin(433E6)
+  ├─ LoRa.begin(920E6)
   ├─ LoRa.setSpreadingFactor(7)
   ├─ LoRa.setSignalBandwidth(125E3)
   └─ LoRa.setCodingRate4(5)
@@ -178,7 +178,7 @@ setup()
   ├─ Serial.begin(9600)
   ├─ pinMode(LED_PIN, OUTPUT)
   ├─ LoRa.setPins(NSS=10, RST=9, DIO0=2)
-  ├─ LoRa.begin(433E6)
+  ├─ LoRa.begin(920E6)
   ├─ LoRa.setSpreadingFactor(7)
   ├─ LoRa.setSignalBandwidth(125E3)
   ├─ LoRa.setCodingRate4(5)
@@ -230,7 +230,7 @@ Receiver menggunakan mekanisme **interrupt-driven** yang efisien:
 ## Topologi Komunikasi LoRa
 
 ```
-┌────────────────────────────┐        LoRa 433 MHz         ┌──────────────────────────────┐
+┌────────────────────────────┐        LoRa 920 MHz         ┌──────────────────────────────┐
 │   BOARD A — Sender (COM8)  │ ──────────────────────────► │  BOARD B — Receiver (COM9)   │
 │   02a-sender-dragino.ino   │     "Hello #0", "Hello #1"  │  02b-receiver-dragino.ino    │
 │   LED blink tiap TX        │        setiap 2 detik       │  LED blink saat RX           │
@@ -248,7 +248,7 @@ Receiver menggunakan mekanisme **interrupt-driven** yang efisien:
 
 | Parameter | Nilai | Berlaku di |
 |---|---|---|
-| Frekuensi | **433 MHz** | 02a + 02b |
+| Frekuensi | **920 MHz** | 02a + 02b |
 | Bandwidth | **125 kHz** | 02a + 02b |
 | Spreading Factor | **SF7** | 02a + 02b |
 | Coding Rate | **4/5** | 02a + 02b |
@@ -276,7 +276,7 @@ arduino-cli lib install "LoRa"
 
 ### Persiapan
 
-- Siapkan **2 set** Arduino Uno + Dragino LoRa Shield v1.2 (versi 433 MHz)
+- Siapkan **2 set** Arduino Uno + Dragino LoRa Shield v1.2 (versi 920 MHz)
 - Pasang antena SMA pada kedua shield
 - Pastikan **R9 (0 ohm) terpasang** di shield (CS ke D10) — cek jumper resistor
 - Install library **LoRa** via Arduino CLI atau Library Manager
@@ -310,7 +310,7 @@ Buka Serial Monitor **COM9** (9600 baud) — tampil pesan diterima + RSSI + SNR,
 ```
 === LoRa SENDER (Dragino) ===
 Init LoRa ... OK
-Freq: 433.00 MHz | BW: 125 kHz | SF7 | Power: 17 dBm
+Freq: 920.00 MHz | BW: 125 kHz | SF7 | Power: 17 dBm
 Mulai kirim tiap 2 detik...
 
 [TX] Kirim: "Hello #0" ... OK
@@ -323,7 +323,7 @@ Mulai kirim tiap 2 detik...
 ```
 === LoRa RECEIVER (Dragino) ===
 Init LoRa ... OK
-Freq: 433.00 MHz | BW: 125 kHz | SF7
+Freq: 920.00 MHz | BW: 125 kHz | SF7
 Menunggu paket (non-blocking)...
 
 ================================
@@ -347,7 +347,7 @@ Menunggu paket (non-blocking)...
 |---|---|---|
 | `Init LoRa ... GAGAL!` | SPI tidak terhubung / CS salah | Pastikan R9 (0 ohm) terpasang di shield; cek `NSS_PIN = 10` |
 | `Init LoRa ... GAGAL!` | Shield tidak terpasang sempurna | Lepas dan pasang ulang shield ke Arduino |
-| Sender OK tapi receiver tidak menerima | Frekuensi tidak cocok | Pastikan kedua sketch pakai `433E6` |
+| Sender OK tapi receiver tidak menerima | Frekuensi tidak cocok | Pastikan kedua sketch pakai `920E6` |
 | Sender OK tapi receiver tidak menerima | Antena tidak terpasang | Pasang antena SMA pada kedua shield |
 | LED tidak menyala / tidak berkedip | Pin D13 masih menjadi SCK aktif | Normal saat SPI aktif; LED akan blink setelah SPI idle |
 | LED tidak berfungsi sama sekali | `LED_PIN` salah | Pastikan `#define LED_PIN LED_BUILTIN` atau ganti ke pin eksternal |

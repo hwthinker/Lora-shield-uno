@@ -44,7 +44,7 @@ Subproject `01-lora-uart` adalah contoh komunikasi LoRa **paling dasar** — sat
 | **Board utama** | Arduino Uno (ATmega328P) |
 | **Shield LoRa** | Dragino LoRa Shield v1.2 |
 | **Modul LoRa** | SX1276 (onboard shield) |
-| **Frekuensi** | **433 MHz** |
+| **Frekuensi** | **920 MHz** |
 | **Antena** | Antena LoRa eksternal via konektor SMA (wajib dipasang pada kedua board) |
 | **Jumlah board** | **2 set** — satu sender (COM8), satu receiver (COM9) |
 
@@ -82,7 +82,7 @@ Subproject `01-lora-uart` adalah contoh komunikasi LoRa **paling dasar** — sat
 
 ```
 ┌──────────────────────────┐                      ┌──────────────────────────┐
-│   SENDER (COM8)          │    LoRa 433 MHz       │   RECEIVER (COM9)        │
+│   SENDER (COM8)          │    LoRa 920 MHz       │   RECEIVER (COM9)        │
 │   sender.ino             │ ─────────────────►    │   receiver.ino           │
 │   Kirim tiap 2 detik     │   "Hello LoRa #N"     │   Polling parsePacket()  │
 │   TX blocking            │                       │   Cetak data + RSSI + SNR│
@@ -104,7 +104,7 @@ Subproject `01-lora-uart` adalah contoh komunikasi LoRa **paling dasar** — sat
 setup()
   ├─ Serial.begin(9600)
   ├─ LoRa.setPins(10, 9, 2)
-  ├─ LoRa.begin(433E6)
+  ├─ LoRa.begin(920E6)
   └─ Set SF7, BW=125kHz, CR=4/5, Power=17dBm
 
 loop()
@@ -123,7 +123,7 @@ loop()
 setup()
   ├─ Serial.begin(9600)
   ├─ LoRa.setPins(10, 9, 2)
-  ├─ LoRa.begin(433E6)
+  ├─ LoRa.begin(920E6)
   └─ Set SF7, BW=125kHz, CR=4/5
 
 loop()
@@ -141,7 +141,7 @@ loop()
 
 | Parameter | Nilai |
 |---|---|
-| Frekuensi | **433 MHz** |
+| Frekuensi | **920 MHz** |
 | Bandwidth | **125 kHz** |
 | Spreading Factor | **SF7** |
 | Coding Rate | **4/5** |
@@ -200,7 +200,7 @@ Buka Serial Monitor pada kedua port (baud **9600**). Sender langsung mengirim be
 ```
 === LoRa SENDER ===
 Init LoRa ... OK
-Frekuensi : 433.00 MHz
+Frekuensi : 920.00 MHz
 SF=7, BW=125kHz, CR=4/5, Power=17dBm
 Kirim tiap 2 detik...
 
@@ -214,7 +214,7 @@ Kirim tiap 2 detik...
 ```
 === LoRa RECEIVER ===
 Init LoRa ... OK
-Frekuensi : 433.00 MHz
+Frekuensi : 920.00 MHz
 SF=7, BW=125kHz, CR=4/5
 Menunggu paket...
 
@@ -237,6 +237,6 @@ Menunggu paket...
 |---|---|---|
 | `Init LoRa ... GAGAL!` | R9 tidak terpasang / shield tidak terpasang sempurna | Cek R9 (0 ohm), lepas-pasang shield |
 | Sender cetak "terkirim" tapi receiver tidak mencetak apa-apa | Antena tidak terpasang | Pasang antena SMA pada kedua board |
-| Receiver tidak mencetak apa-apa | Frekuensi atau parameter tidak cocok | Pastikan sender dan receiver pakai `433E6`, SF7, BW 125kHz |
+| Receiver tidak mencetak apa-apa | Frekuensi atau parameter tidak cocok | Pastikan sender dan receiver pakai `920E6`, SF7, BW 125kHz |
 | Upload error: `Access is denied` | Serial Monitor masih terbuka | Tutup Serial Monitor, upload ulang |
 | Beberapa paket hilang | Jarak terlalu jauh atau interferensi | Perkecil jarak; naikkan SF (`setSpreadingFactor(9)`) untuk jangkauan lebih jauh |

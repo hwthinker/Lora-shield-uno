@@ -1,11 +1,11 @@
 /*
   LoRa Master-Slave 3 Node - Dragino LoRa Shield v1.2 + Arduino Uno (ATmega328P)
   Library : LoRa by sandeepmistry v0.8.x
-  Upload to: COM8 (MASTER)
+  Upload to: COM3 (MASTER)
 
   Topologi Master-Slave dengan 3 node:
-    - 1 Master (COM8) : polling Slave 1 & Slave 2 secara bergantian
-    - 2 Slave  (COM9, COM10) : hanya merespon saat dipanggil
+    - 1 Master (COM3) : polling Slave 1 & Slave 2 secara bergantian
+    - 2 Slave  (COM4, COM5) : hanya merespon saat dipanggil
 
   Mekanisme:
     TX : blocking (endPacket) — sederhana dan andal di AVR
@@ -24,7 +24,7 @@
 #define DIO0_PIN          2
 #define LED_PIN          LED_BUILTIN
 
-#define FREQUENCY        433E6
+#define FREQUENCY        920E6
 #define BANDWIDTH        125E3
 #define SPREADING_FACTOR 7
 #define CODING_RATE      5
@@ -84,7 +84,7 @@ bool pollSlave(int slaveNum, int& dataOut, int& okCount, int& failCount) {
 }
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial);
 
   pinMode(LED_PIN, OUTPUT);
@@ -108,8 +108,8 @@ void setup() {
   Serial.print(F("Freq: ")); Serial.print(FREQUENCY / 1E6); Serial.println(F(" MHz"));
   Serial.print(F("SF")); Serial.print(SPREADING_FACTOR);
   Serial.print(F(" | BW: ")); Serial.print(BANDWIDTH / 1E3); Serial.println(F(" kHz"));
-  Serial.println(F("Peran: MASTER (COM8)"));
-  Serial.println(F("Slave: COM9 (S1) & COM10 (S2)"));
+  Serial.println(F("Peran: MASTER (COM3)"));
+  Serial.println(F("Slave: COM4 (S1) & COM5 (S2)"));
   Serial.println();
 }
 

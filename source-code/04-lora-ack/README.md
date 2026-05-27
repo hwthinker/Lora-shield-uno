@@ -19,7 +19,7 @@ Implementasi komunikasi LoRa dengan mekanisme **konfirmasi pengiriman (ACK)**. S
 | **Board** | Arduino Uno (ATmega328P) |
 | **Shield** | Dragino LoRa Shield v1.2 |
 | **LoRa Chip** | SX1276 |
-| **Frekuensi** | 433 MHz |
+| **Frekuensi** | 920 MHz |
 | **LED** | LED built-in D13 — menyala singkat saat ACK diterima / paket RX |
 
 ---
@@ -63,7 +63,7 @@ Implementasi komunikasi LoRa dengan mekanisme **konfirmasi pengiriman (ACK)**. S
 
 | Parameter | Nilai |
 |---|---|
-| Frekuensi | **433 MHz** |
+| Frekuensi | **920 MHz** |
 | Spreading Factor | **SF7** |
 | Bandwidth | **125 kHz** |
 | Coding Rate | **4/5** |
@@ -160,7 +160,7 @@ Program menggunakan `LoRa.endPacket()` (blocking) bukan async, karena:
 ```
 === LoRa ACK SENDER ===
 Init LoRa ... OK
-Freq: 433.00 MHz | SF7 | ACK timeout: 3000 ms
+Freq: 920.00 MHz | SF7 | ACK timeout: 3000 ms
 
 [TX] Kirim: DATA:0 ... selesai
 [RX] Balasan: ACK:0
@@ -175,7 +175,7 @@ Freq: 433.00 MHz | SF7 | ACK timeout: 3000 ms
 ```
 === LoRa ACK RECEIVER ===
 Init LoRa ... OK
-Freq: 433.00 MHz
+Freq: 920.00 MHz
 Menunggu paket DATA...
 
 === PAKET DITERIMA ===
@@ -210,7 +210,7 @@ arduino-cli upload -p COM8 --fqbn arduino:avr:uno sender-ack
 
 | Gejala | Kemungkinan Penyebab | Solusi |
 |---|---|---|
-| Selalu `NO ACK` | Jarak terlalu jauh / frekuensi tidak cocok | Perkecil jarak, pastikan kedua pakai `433E6` |
+| Selalu `NO ACK` | Jarak terlalu jauh / frekuensi tidak cocok | Perkecil jarak, pastikan kedua pakai `920E6` |
 | `Init LoRa ... GAGAL` | R9 shield tidak terpasang / SPI error | Periksa jumper R9, lepas-pasang shield |
 | Receiver tidak balas | `LoRa.receive()` tidak dipanggil di setup | Pastikan ada di `setup()` |
 | ACK salah nomor | Ada paket sisa / ghost packet | Normal jika ada interferensi — sender akan tunggu dan retry cycle berikutnya |
