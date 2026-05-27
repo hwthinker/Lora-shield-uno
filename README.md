@@ -269,6 +269,50 @@ source-code/05-master-slave-3node/
 
 ---
 
+
+
+## Kontribusi & Lisensi
+
+**Kontributor Utama:**  
+**HwThinker** — desain, implementasi, dan dokumentasi seluruh kode serta arsitektur project ini.  
+📧 hwthinker@gmail.com
+
+
+
+---
+
+## Lisensi
+
+Copyright © 2026 HwThinker (hwthinker@gmail.com)
+
+Licensed under the **MIT License**.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+
+
+**Jika Anda memodifikasi atau mendistribusikan ulang kode ini, Anda wajib mencantumkan:**  
+> *"Originally developed by HwThinker (hwthinker@gmail.com)"*  
+> beserta tautan ke repositori ini (jika ada).
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+
 ## Referensi
 
 - [Dragino LoRa Shield — GitHub resmi](https://github.com/dragino/Lora/tree/master/Lora%20Shield)
